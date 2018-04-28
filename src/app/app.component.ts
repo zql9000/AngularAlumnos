@@ -9,7 +9,15 @@ import { ItemList } from './ItemList';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  alumno: Alumno = {nombre: 'Juan', apellido: 'Perez', sexo: 1, perfil: 0, activo: true};
+  alumnos: Alumno[] = [
+    {id: 1, nombre: 'Juan', apellido: 'Perez', sexo: 1, perfil: 0, activo: true},
+    {id: 2, nombre: 'Pedro', apellido: 'Garcia', sexo: 1, perfil: 1, activo: true},
+    {id: 3, nombre: 'Ana', apellido: 'Romero', sexo: 0, perfil: 2, activo: true},
+    {id: 4, nombre: 'Maria', apellido: 'Gutierrez', sexo: 0, perfil: 2, activo: true},
+    {id: 5, nombre: 'Esteban', apellido: 'Smith', sexo: 1, perfil: 0, activo: true}
+  ];
+
+  alumnoSeleccionado: Alumno = null;
 
   sexos: ItemList[] = [
     new ItemList( 0, 'Femenino'),
@@ -29,5 +37,17 @@ export class AppComponent {
 
   Perfiles(index: number): string {
     return this.perfiles.find(item => item.index === index).descripcion;
+  }
+
+  AlumnoSelect(alumno: Alumno) {
+    this.alumnoSeleccionado = alumno;
+  }
+
+  EstaSeleccionado(alumno: Alumno) {
+    if (this.alumnoSeleccionado) {
+      return this.alumnoSeleccionado.id === alumno.id;
+    } else {
+      return false;
+    }
   }
 }
