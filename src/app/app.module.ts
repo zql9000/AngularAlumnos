@@ -11,10 +11,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { AppComponent } from './app.component';
+import { AlumnosListaComponent } from './alumnos-lista/alumnos-lista.component';
+import { AlumnoEdicionComponent } from './alumno-edicion/alumno-edicion.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AlumnosListaComponent,
+    AlumnoEdicionComponent
   ],
   imports: [
     BrowserModule,

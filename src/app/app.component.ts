@@ -9,6 +9,8 @@ import { ItemList } from './ItemList';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  constructor() { }
+
   alumnos: Alumno[] = [
     {id: 1, nombre: 'Juan', apellido: 'Perez', sexo: 1, perfil: 0, activo: true},
     {id: 2, nombre: 'Pedro', apellido: 'Garcia', sexo: 1, perfil: 1, activo: true},
@@ -19,35 +21,7 @@ export class AppComponent {
 
   alumnoSeleccionado: Alumno = null;
 
-  sexos: ItemList[] = [
-    new ItemList( 0, 'Femenino'),
-    new ItemList( 1, 'Masculino'),
-    new ItemList( 2, 'Otro')
-  ];
-
-  perfiles: ItemList[] = [
-    new ItemList( 0, 'Desarrollador'),
-    new ItemList( 1, 'IT'),
-    new ItemList( 2, 'Power User'),
-  ];
-
-  Sexos(index: number): string {
-    return this.sexos.find(item => item.index === index).descripcion;
-  }
-
-  Perfiles(index: number): string {
-    return this.perfiles.find(item => item.index === index).descripcion;
-  }
-
-  AlumnoSelect(alumno: Alumno) {
+  Seleccionar(alumno: Alumno): void {
     this.alumnoSeleccionado = alumno;
-  }
-
-  EstaSeleccionado(alumno: Alumno) {
-    if (this.alumnoSeleccionado) {
-      return this.alumnoSeleccionado.id === alumno.id;
-    } else {
-      return false;
     }
-  }
 }
