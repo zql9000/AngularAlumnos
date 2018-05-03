@@ -12,9 +12,8 @@ export class AlumnosListaComponent implements OnInit {
   constructor() { }
 
   @Input() alumnos: Alumno[];
+  @Input() alumnoSeleccionado: Alumno = null;
   @Output() Seleccion = new EventEmitter<Alumno>();
-
-  alumnoSeleccionado: Alumno = null;
 
   perfiles: ItemList[] = [
     new ItemList( 0, 'Desarrollador'),

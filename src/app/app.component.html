@@ -4,9 +4,11 @@
 <div class="content">
   <div></div>
   <app-alumnos-lista [alumnos] = "alumnos"
-    (Seleccion)="Seleccionar($event)">
+  [alumnoSeleccionado] = "alumnoSeleccionado"
+  (Seleccion)="Seleccionar($event)">
   </app-alumnos-lista>
-  <app-alumno-edicion [alumnoSeleccionado] = "alumnoSeleccionado">
+  <app-alumno-edicion [alumnoSeleccionado] = "alumnoSeleccionado"
+  (Deseleccionar)="Deseleccionar()">
   </app-alumno-edicion>
   <div></div>
 </div>

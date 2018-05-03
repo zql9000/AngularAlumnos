@@ -23,5 +23,9 @@ export class AppComponent {
 
   Seleccionar(alumno: Alumno): void {
     this.alumnoSeleccionado = alumno;
-    }
+  }
+
+  Deseleccionar(): void {
+    this.alumnoSeleccionado = null;
+  }
 }

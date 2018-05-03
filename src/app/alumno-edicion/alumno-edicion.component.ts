@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { Alumno } from '../alumno';
 import { ItemList } from '../ItemList';
@@ -12,6 +12,7 @@ export class AlumnoEdicionComponent implements OnInit {
   constructor() { }
 
   @Input() alumnoSeleccionado: Alumno;
+  @Output() Deseleccionar = new EventEmitter();
 
   sexos: ItemList[] = [
     new ItemList( 0, 'Femenino'),
@@ -31,6 +32,25 @@ export class AlumnoEdicionComponent implements OnInit {
 
   Perfiles(index: number): string {
     return this.perfiles.find(item => item.index === index).descripcion;
+  }
+
+  Regresar() {
+    this.alumnoSeleccionado = null;
+    this.Deseleccionar.emit();
+  }
+
+  Guardar(form: any) {
+    // this.alumnoSeleccionado.nombre = form.nombre;
+    // this.alumnoSeleccionado.apellido = form.apellido;
+    // this.alumnoSeleccionado.sexo = form.sexo;
+    // this.alumnoSeleccionado.perfil = form.perfil;
+    // this.alumnoSeleccionado.activo = form.activo;
+
+    Object.keys(form).forEach((key, index) =>
+      this.alumnoSeleccionado[key] = form[key]
+    );
+
+    this.Regresar();
   }
 
   ngOnInit() {
