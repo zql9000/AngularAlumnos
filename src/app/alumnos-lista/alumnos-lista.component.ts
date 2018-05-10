@@ -15,6 +15,8 @@ export class AlumnosListaComponent implements OnInit {
   @Input() alumnos: Alumno[];
   @Input() alumnoSeleccionado: Alumno = null;
   @Output() Seleccion = new EventEmitter<Alumno>();
+  @Output() AgregarAlumno = new EventEmitter<void>();
+  @Output() FiltrarAlumnos = new EventEmitter<string>();
 
   AlumnoSelect(alumno: Alumno) {
     this.alumnoSeleccionado = alumno;
@@ -27,6 +29,14 @@ export class AlumnosListaComponent implements OnInit {
     } else {
       return false;
     }
+  }
+
+  Agregar() {
+    this.AgregarAlumno.emit();
+  }
+
+  Filtrar(filtro: string) {
+    this.FiltrarAlumnos.emit(filtro);
   }
 
   ngOnInit() {

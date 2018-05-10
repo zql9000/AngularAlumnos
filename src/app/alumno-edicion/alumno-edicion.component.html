@@ -1,5 +1,6 @@
 <mat-card *ngIf="alumnoSeleccionado">
-  <h2>Alumno Seleccionado</h2>
+  <h2 *ngIf="alumnoSeleccionado.id != 0">Editar Alumno</h2>
+  <h2 *ngIf="alumnoSeleccionado.id == 0">Agregar Alumno</h2>
   <form novalidate #f="ngForm">
     <mat-form-field class="all-width">
       <input matInput required name="nombre"

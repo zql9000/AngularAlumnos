@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlumnosService } from './alumnos.service';
 
 import { Alumno } from './alumno';
+import { Operaciones } from './operaciones';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +24,19 @@ export class AppComponent implements OnInit {
     this.alumnoSeleccionado = alumno;
   }
 
-  Deseleccionar(): void {
+  ActualizarAlumno(operacion: Operaciones): void {
+    if (operacion === 'agregar') {
+      this._alumnosService.Add(this.alumnoSeleccionado);
+    }
+
     this.alumnoSeleccionado = null;
+  }
+
+  FiltrarAlumnos(filtro: string): void {
+    this.alumnos = this._alumnosService.FindbyNombreOApellido(filtro);
+  }
+
+  AgregarAlumno(): void {
+    this.alumnoSeleccionado = new Alumno(0, '', '', 0, true, 0);
   }
 }

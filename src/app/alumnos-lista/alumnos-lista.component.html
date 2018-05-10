@@ -1,3 +1,10 @@
+<div class="search-box">
+  <mat-icon >search</mat-icon>
+  <mat-form-field>
+    <input matInput #filtrar placeholder="filtrar..."
+    (keyup)="Filtrar(filtrar.value)">
+  </mat-form-field>
+</div>
 <mat-card class="lista">
   <mat-list>
     <mat-list-item
@@ -17,3 +24,4 @@
     </mat-list-item>
   </mat-list>
 </mat-card>
+<button mat-fab class="add-button" (click)="Agregar()">+</button>
