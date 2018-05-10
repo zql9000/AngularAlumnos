@@ -20,7 +20,7 @@
     Sexo:
     <mat-radio-group [ngModel] = "alumnoSeleccionado.sexo" name="sexo">
       <mat-radio-button class="all-width"
-      *ngFor="let sexo of sexos"
+      *ngFor="let sexo of ItemListSrv.GetSexos()"
       [value] = "sexo.index"
       color="primary">
         {{sexo.descripcion}}
@@ -30,7 +30,7 @@
     <mat-form-field class="all-width">
       <mat-select placeholder="Perfil" color="primary"
       [ngModel]="alumnoSeleccionado.perfil" name="perfil">
-        <mat-option *ngFor="let perfil of perfiles" color="primary"
+        <mat-option *ngFor="let perfil of ItemListSrv.GetPerfiles()" color="primary"
         [value]="perfil.index">
           {{ perfil.descripcion }}
         </mat-option>

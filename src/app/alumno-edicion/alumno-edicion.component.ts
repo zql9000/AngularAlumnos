@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
+import { ItemListService } from '../item-list.service';
+
 import { Alumno } from '../alumno';
-import { ItemList } from '../ItemList';
 
 @Component({
   selector: 'app-alumno-edicion',
@@ -9,30 +10,10 @@ import { ItemList } from '../ItemList';
   styleUrls: ['./alumno-edicion.component.css']
 })
 export class AlumnoEdicionComponent implements OnInit {
-  constructor() { }
+  constructor(public ItemListSrv: ItemListService) {}
 
   @Input() alumnoSeleccionado: Alumno;
   @Output() Deseleccionar = new EventEmitter();
-
-  sexos: ItemList[] = [
-    new ItemList( 0, 'Femenino'),
-    new ItemList( 1, 'Masculino'),
-    new ItemList( 2, 'Otro')
-  ];
-
-  perfiles: ItemList[] = [
-    new ItemList( 0, 'Desarrollador'),
-    new ItemList( 1, 'IT'),
-    new ItemList( 2, 'Power User'),
-  ];
-
-  Sexos(index: number): string {
-    return this.sexos.find(item => item.index === index).descripcion;
-  }
-
-  Perfiles(index: number): string {
-    return this.perfiles.find(item => item.index === index).descripcion;
-  }
 
   Regresar() {
     this.alumnoSeleccionado = null;

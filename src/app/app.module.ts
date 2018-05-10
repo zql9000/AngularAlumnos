@@ -17,6 +17,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { AppComponent } from './app.component';
 import { AlumnosListaComponent } from './alumnos-lista/alumnos-lista.component';
 import { AlumnoEdicionComponent } from './alumno-edicion/alumno-edicion.component';
+import { AlumnosService } from './alumnos.service';
+import { ItemListService } from './item-list.service';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,7 @@ import { AlumnoEdicionComponent } from './alumno-edicion/alumno-edicion.componen
     FormsModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [AlumnosService, ItemListService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

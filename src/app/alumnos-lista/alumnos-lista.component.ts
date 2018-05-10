@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
+import { ItemListService } from '../item-list.service';
+
 import { Alumno } from '../alumno';
-import { ItemList } from '../ItemList';
 
 @Component({
   selector: 'app-alumnos-lista',
@@ -9,21 +10,11 @@ import { ItemList } from '../ItemList';
   styleUrls: ['./alumnos-lista.component.css']
 })
 export class AlumnosListaComponent implements OnInit {
-  constructor() { }
+  constructor(public ItemListSrv: ItemListService) {}
 
   @Input() alumnos: Alumno[];
   @Input() alumnoSeleccionado: Alumno = null;
   @Output() Seleccion = new EventEmitter<Alumno>();
-
-  perfiles: ItemList[] = [
-    new ItemList( 0, 'Desarrollador'),
-    new ItemList( 1, 'IT'),
-    new ItemList( 2, 'Power User'),
-  ];
-
-  Perfiles(index: number): string {
-    return this.perfiles.find(item => item.index === index).descripcion;
-  }
 
   AlumnoSelect(alumno: Alumno) {
     this.alumnoSeleccionado = alumno;
