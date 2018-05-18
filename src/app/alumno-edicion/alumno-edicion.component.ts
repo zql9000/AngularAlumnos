@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
+import { AlumnosService } from '../alumnos.service';
 import { ItemListService } from '../item-list.service';
 
 import { Alumno } from '../alumno';
@@ -11,35 +13,39 @@ import { Operaciones } from '../operaciones';
   styleUrls: ['./alumno-edicion.component.css']
 })
 export class AlumnoEdicionComponent implements OnInit {
-  constructor(public ItemListSrv: ItemListService) {}
+  constructor(public ItemListSrv: ItemListService,
+    private _router: Router,
+    private _activeRoute: ActivatedRoute,
+    private _alumnosSrv: AlumnosService
+  ) {}
 
-  @Input() alumnoSeleccionado: Alumno;
-  @Output() Deseleccionar = new EventEmitter<Operaciones>();
+  alumnoSeleccionado: Alumno;
 
   Regresar() {
-    this.alumnoSeleccionado = null;
-    this.Deseleccionar.emit('cancelar');
+    this._router.navigate(['/alumnos']);
   }
 
   Guardar(form: any) {
-    // this.alumnoSeleccionado.nombre = form.nombre;
-    // this.alumnoSeleccionado.apellido = form.apellido;
-    // this.alumnoSeleccionado.sexo = form.sexo;
-    // this.alumnoSeleccionado.perfil = form.perfil;
-    // this.alumnoSeleccionado.activo = form.activo;
-
+    console.log(form);
     Object.keys(form).forEach((key, index) =>
-      this.alumnoSeleccionado[key] = form[key]
-    );
-
+      this.alumnoSeleccionado[key] = form[key]);
     if (this.alumnoSeleccionado.id === 0) {
-      this.Deseleccionar.emit('agregar');
+      // this.FinDeEdicion.emit('agregar');
+      this._alumnosSrv.Add(this.alumnoSeleccionado);
     } else {
-      this.Deseleccionar.emit('editar');
+      // this.FinDeEdicion.emit('editar');
+      this._alumnosSrv.Update(this.alumnoSeleccionado);
     }
+    this.Regresar();
   }
 
   ngOnInit() {
+    const operacion = this._activeRoute.snapshot.paramMap.get('operacion');
+    const id = Number(this._activeRoute.snapshot.paramMap.get('id'));
+    if (operacion === 'agregar') {
+      this.alumnoSeleccionado = new Alumno(0, '', '', 0, true, 0);
+    } else {
+      this.alumnoSeleccionado = this._alumnosSrv.Get(id);
+    }
   }
-
 }

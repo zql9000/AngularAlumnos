@@ -54,5 +54,9 @@ mat-list {
 }
 
 :host {
-  position: relative;
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  right: 8px;
+  bottom: 8px;
 }

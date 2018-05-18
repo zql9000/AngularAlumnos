@@ -1,8 +1,12 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { MatTableDataSource } from '@angular/material';
 
 import { ItemListService } from '../item-list.service';
-
+import { AlumnosService } from '../alumnos.service';
 import { Alumno } from '../alumno';
+import { Operaciones } from '../operaciones';
 
 @Component({
   selector: 'app-alumnos-lista',
@@ -10,17 +14,25 @@ import { Alumno } from '../alumno';
   styleUrls: ['./alumnos-lista.component.css']
 })
 export class AlumnosListaComponent implements OnInit {
-  constructor(public ItemListSrv: ItemListService) {}
+  alumnos: Alumno[];
+  alumnoSeleccionado: Alumno = null;
+  dataSource: MatTableDataSource<Alumno>;
+  displayedColumns = ['id', 'nombre', 'apellido', 'perfil', 'sexo', 'activo', 'acciones'];
 
-  @Input() alumnos: Alumno[];
-  @Input() alumnoSeleccionado: Alumno = null;
-  @Output() Seleccion = new EventEmitter<Alumno>();
-  @Output() AgregarAlumno = new EventEmitter<void>();
-  @Output() FiltrarAlumnos = new EventEmitter<string>();
+  constructor(
+    public ItemListSrv: ItemListService,
+    public AlumnosSrv: AlumnosService,
+    private _router: Router
+  ) {}
+
+  ngOnInit() {
+    this.alumnos = this.AlumnosSrv.GetAll();
+    this.dataSource = new MatTableDataSource(this.alumnos);
+  }
 
   AlumnoSelect(alumno: Alumno) {
     this.alumnoSeleccionado = alumno;
-    this.Seleccion.emit(this.alumnoSeleccionado);
+    // this.Seleccion.emit(this.alumnoSeleccionado);
   }
 
   EstaSeleccionado(alumno: Alumno) {
@@ -32,13 +44,20 @@ export class AlumnosListaComponent implements OnInit {
   }
 
   Agregar() {
-    this.AgregarAlumno.emit();
+    this._router.navigate(['/alumno', 'agregar', 0]);
   }
 
   Filtrar(filtro: string) {
-    this.FiltrarAlumnos.emit(filtro);
+    this.alumnos = this.AlumnosSrv.FindbyNombreOApellido(filtro);
+    this.dataSource = new MatTableDataSource(this.alumnos);
   }
 
-  ngOnInit() {
+  EditarAlumno(alumno: Alumno) {
+    this._router.navigate(['/alumno', 'editar', alumno.id]);
+  }
+
+  EliminarAlumno(alumno: Alumno) {
+    this.AlumnosSrv.Delete(alumno.id);
+    this.ngOnInit();
   }
 }
