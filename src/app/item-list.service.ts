@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Alumno } from './alumno';
-import { ItemList } from './ItemList';
+import { ItemList } from './itemList';
 
 @Injectable()
 export class ItemListService {
