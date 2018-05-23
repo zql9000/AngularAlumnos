@@ -5,6 +5,8 @@ import { MatTableDataSource } from '@angular/material';
 
 import { ItemListService } from '../item-list.service';
 import { AlumnosService } from '../alumnos.service';
+import { DataService } from '../data.service';
+
 import { Alumno } from '../alumno';
 import { Operaciones } from '../operaciones';
 
@@ -22,12 +24,14 @@ export class AlumnosListaComponent implements OnInit {
   constructor(
     public ItemListSrv: ItemListService,
     public AlumnosSrv: AlumnosService,
-    private _router: Router
+    private _router: Router,
+    private _DataSrv: DataService
   ) {}
 
   ngOnInit() {
     this.alumnos = this.AlumnosSrv.GetAll();
     this.dataSource = new MatTableDataSource(this.alumnos);
+    this._DataSrv.tituloPrincipal('Lista de Alumnos');
   }
 
   AlumnoSelect(alumno: Alumno) {

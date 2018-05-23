@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AlumnosService } from './alumnos.service';
+import { DataService } from './data.service';
 
 import { Alumno } from './alumno';
 import { Operaciones } from './operaciones';
@@ -13,11 +14,14 @@ import { Operaciones } from './operaciones';
 export class AppComponent implements OnInit {
   alumnos: Alumno[];
   alumnoSeleccionado: Alumno = null;
+  titulo: string;
 
-  constructor(private _alumnosService: AlumnosService) {}
+  constructor(
+    private _DataSrv: DataService
+  ) {}
 
   ngOnInit() {
-    this.alumnos = this._alumnosService.GetAll();
+    this._DataSrv.tituloPrincipal$.subscribe( titulo => this.titulo = titulo );
   }
 
   Seleccionar(alumno: Alumno): void {
@@ -26,14 +30,14 @@ export class AppComponent implements OnInit {
 
   ActualizarAlumno(operacion: Operaciones): void {
     if (operacion === 'agregar') {
-      this._alumnosService.Add(this.alumnoSeleccionado);
+      // this._alumnosService.Add(this.alumnoSeleccionado);
     }
 
     this.alumnoSeleccionado = null;
   }
 
   FiltrarAlumnos(filtro: string): void {
-    this.alumnos = this._alumnosService.FindbyNombreOApellido(filtro);
+    // this.alumnos = this._alumnosService.FindbyNombreOApellido(filtro);
   }
 
   AgregarAlumno(): void {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-cursos',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CursosComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private _DataSrv: DataService
+  ) { }
 
   ngOnInit() {
+    this._DataSrv.tituloPrincipal('Cursos');
   }
 
 }

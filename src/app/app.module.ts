@@ -24,6 +24,7 @@ import { AlumnosService } from './alumnos.service';
 import { ItemListService } from './item-list.service';
 import { AsistenciasComponent } from './asistencias/asistencias.component';
 import { CursosComponent } from './cursos/cursos.component';
+import { DataService } from './data.service';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,7 @@ import { CursosComponent } from './cursos/cursos.component';
       { path: 'alumno/:operacion/:id' , component: AlumnoEdicionComponent}
     ])
   ],
-  providers: [AlumnosService, ItemListService],
+  providers: [AlumnosService, ItemListService, DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

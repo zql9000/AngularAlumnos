@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { AlumnosService } from '../alumnos.service';
 import { ItemListService } from '../item-list.service';
+import { DataService } from '../data.service';
 
 import { Alumno } from '../alumno';
 import { Operaciones } from '../operaciones';
@@ -16,7 +17,8 @@ export class AlumnoEdicionComponent implements OnInit {
   constructor(public ItemListSrv: ItemListService,
     private _router: Router,
     private _activeRoute: ActivatedRoute,
-    private _alumnosSrv: AlumnosService
+    private _alumnosSrv: AlumnosService,
+    private _DataSrv: DataService
   ) {}
 
   alumnoSeleccionado: Alumno;
@@ -44,8 +46,10 @@ export class AlumnoEdicionComponent implements OnInit {
     const id = Number(this._activeRoute.snapshot.paramMap.get('id'));
     if (operacion === 'agregar') {
       this.alumnoSeleccionado = new Alumno(0, '', '', 0, true, 0);
+      this._DataSrv.tituloPrincipal('Agregar Alumno');
     } else {
       this.alumnoSeleccionado = this._alumnosSrv.Get(id);
+      this._DataSrv.tituloPrincipal('Editar Alumno');
     }
   }
 }

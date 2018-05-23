@@ -65,3 +65,7 @@
 .activo {
   border: 2px solid rgba(64, 240, 200, 0.7);
 }
+
+.titulo {
+  margin-left: 500px;
+}
